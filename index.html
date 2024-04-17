@@ -22,8 +22,23 @@
                     }.bind(this));
                 },
             });
+AFRAME.registerComponent('videohandler2', {
+                init: function () {
+                    var marker = this.el;
+                    this.vid = document.querySelector("#vid2");
 
-        function initVideo() {
+                    marker.addEventListener('markerFound', function () {
+                        this.toggle = true;
+                        this.vid.play();
+                    }.bind(this));
+
+                    marker.addEventListener('markerLost', function () {
+                        this.toggle = false;
+                        this.vid.pause();
+                    }.bind(this));
+                },
+            });
+        function initVideo() { 
             var vid = document.querySelector("#vid");
             vid.play();
         }
@@ -94,7 +109,7 @@
                 type="pattern"
                 preset="custom"
                 url="assets/marker2.patt"
-                videohandler
+                videohandler2
                 smooth="true"
                 smoothCount="10"
                 smoothTolerance="0.01"
